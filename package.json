@@ -1,0 +1,44 @@
+{
+  "name": "egrid",
+  "description": "element-ui table packaging",
+  "version": "1.0.0",
+  "author": "芊野 <free.nan.sky@gmail.com>",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:kinglisky/egrid.git"
+  },
+  "main": "lib/index.com.min.js",
+  "scripts": {
+    "clear": "rm -rf lib",
+    "doc": "docsify serve docs",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
+    "build": "npm run clear && node rollup.config.js"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-helpers": "^6.24.1",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-es2015-rollup": "^3.0.0",
+    "cross-env": "^5.0.5",
+    "css-loader": "^0.28.7",
+    "element-ui": "^1.4.7",
+    "file-loader": "^1.1.4",
+    "rollup": "^0.50.0",
+    "rollup-plugin-babel": "^3.0.2",
+    "rollup-plugin-commonjs": "^8.2.4",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-uglify": "^2.0.1",
+    "rollup-plugin-vue2": "^0.8.0",
+    "style-loader": "^0.19.0",
+    "uglify-es": "^3.1.5",
+    "url-loader": "^0.6.2",
+    "vue": "^2.4.4",
+    "vue-loader": "^13.0.5",
+    "vue-template-compiler": "^2.4.4",
+    "webpack": "^3.6.0",
+    "webpack-dev-server": "^2.9.1"
+  }
+}
