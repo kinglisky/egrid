@@ -23,11 +23,10 @@
 
 > `npm i egrid -S`
 
-!> `egrid` 只依赖 `Element` 中的 `Table` 与 `TableColumn` 组件不会将整个 `Element` 导入。
+`egrid` 只依赖 `Element` 中的 `Table` 与 `TableColumn` 组件不会将整个 `Element` 导入。
 但不包含样式，`Table` 的样式需要用户手动引入。
 
 使用：
-
 ```javascript
 import Vue from 'vue'
 import Egrid from 'egrid'

@@ -2,7 +2,9 @@
 
 基于 `Element-UI` `Table` 组件分装的高阶表格组件。
 
-安装 Element：
+min 大小仅 4kb。实现比较简单，源码在这： [https://github.com/kinglisky/egrid](https://github.com/kinglisky/egrid)
+
+首先组件依赖 `Element Table`，先要安装 Element：
 
 > `npm i element-ui -S`
 
