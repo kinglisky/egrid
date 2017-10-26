@@ -1,6 +1,6 @@
 # Egrid
 
-基于 `Element-UI` `Table` 组件分装的高阶表格组件。
+基于 `Element-UI` `Table` 组件封装的高阶表格组件。
 
 min 大小仅 4kb。实现比较简单，源码在这： [https://github.com/kinglisky/egrid](https://github.com/kinglisky/egrid)
 
@@ -204,6 +204,7 @@ const columns = [
     propsHandler: function ({ row, col, column }) {
       return { row, col, column }
     }
+    ......
   }
   ......
 ]
@@ -211,7 +212,7 @@ const columns = [
 
 `columns` 中每项的配置项其实就是 `Element Table-column` 上的 `props` 属性，具体的属性设置可以参考 [Element Table-column 文档](http://element.eleme.io/#/zh-CN/component/table#table-column-attributes)。
 
-在此基础上 `columns` 新增了 `component` `listeners` `propsHandler` 配置属性。
+在此基础上 `columns` 新增了 `component` `listeners` `propsHandler` 配置属性。当然你也可以自定义一些其他的属性附加到 `columns` 上以便后期自定组件中使用，例如附加一些处理函数传递给自定义组件使用。
 
 `component`
 用于配置当前列渲染用的自定义组件，内部使用 `<component>` 实现的，component 的值可以是：`string | ComponentDefinition | ComponentConstructor` 具体参考 [<component> 组件文档](https://cn.vuejs.org/v2/api/#component)
@@ -234,7 +235,18 @@ const columns = [
 可通过 `propsHandler` 对 `{ row, col, column }`  进行转化你想要的形式：
 
 ```javascript
-propsHandler({ row, col, column }) => { msg: row[col.prop] }
+propsHandler({
+  row, col, column
+})
+
+转化成 =>
+
+{
+  msg: row[col.prop],
+  handler (data) {
+    console.log('handler:', data)
+  }
+}
 
 ```
 > column-props 配置
