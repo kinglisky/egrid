@@ -88,9 +88,9 @@ export default {
     column-type="selection"
     :data="data"
     :columns="columns"
-    :column-schema="columnSchema"
-    :column-props="columnProps"
-    :column-handler="columnHandler"
+    :columns-schema="columnsSchema"
+    :columns-props="columnsProps"
+    :columns-handler="columnsHandler"
     @selection-change="selectionChange">
   </egrid>
 </template>
@@ -105,16 +105,16 @@ export default {
     return {
       data: Data.data,
       columns: Data.columns,
-      // columnProps 用于定义 columns 公共的属性，
-      columnProps: {
+      // columnsProps 用于定义 columns 公共的属性，
+      columnsProps: {
         width: 120,
         sortable: true,
         // 定义表格列如何渲染
         component: Editor
       },
 
-      // columnSchema 可以用来单独定义 columns 的某一列，这里的设置会覆盖 columnProps 的配置属性
-      columnSchema: {
+      // columnsSchema 可以用来单独定义 columns 的某一列，这里的设置会覆盖 columnsProps 的配置属性
+      columnsSchema: {
         '地址': {
           width: 'auto',
           // propsHandler 可用于转换传给自定义组件的 props
@@ -136,8 +136,8 @@ export default {
   },
 
   methods: {
-    // columnHandler 可用于在现有的 columns 进行操作，对 columns 进行增删改，这里新增了操作列
-    columnHandler (cols) {
+    // columnsHandler 可用于在现有的 columns 进行操作，对 columns 进行增删改，这里新增了操作列
+    columnsHandler (cols) {
       return cols.concat({
         label: '操作',
         align: 'left',
@@ -169,9 +169,10 @@ export default {
 | `data` | `Array` table 的 data 属性 | - | `[]` |
 | `columns` | `Array` 用于控制表格列渲染 | - | `[]` | 
 | `column-type` | `[String, Array]` 映射到 `Element Table-column` 的 `type` 属性，用于支持功能特殊的功能列（多选、索引、折叠行），不设置则不显示功能列 | `selection/index/expand` | - |
-| `column-props` | `Object` 用于定义所有 `columns` 公共的 `Element Table-column` 属性  | - | - |
-| `column-schema` | `Object` 可以用来单独定义 `columns` 的某一列，这里的设置会覆盖 `columnProps` 的配置属性 <br> 使用 `Element Table-column` 中 `label` 值进行匹配 | - | - |
-| `column-handler` | `Function` 可用于在现有的 `columns` 进行操作，对 `columns` 进行增删改操作。 | - | - |
+| `column-key-map` | `Object` 用于映射 `Table-column` 中 `label` 与 `prop` 值对应的 key | - | `{ label: 'label', prop: 'prop' }` |
+| `columns-props` | `Object` 用于定义所有 `columns` 公共的 `Element Table-column` 属性  | - | - |
+| `columns-schema` | `Object` 可以用来单独定义 `columns` 的某一列，这里的设置会覆盖 `columnsProps` 的配置属性 <br> 使用 `Element Table-column` 中 `label` 值进行匹配 | - | - |
+| `columns-handler` | `Function` 可用于在现有的 `columns` 进行操作，对 `columns` 进行增删改操作。 | - | - |
 | `slot-append` | `Boolean` 是否使用 `Element Table` 的 `slot="append"` | `true/false` | `false` |
 
 
@@ -249,9 +250,9 @@ propsHandler({
 }
 
 ```
-> column-props 配置
+> columns-props 配置
 
-`column-props` 配置用于定义 `columns` 各列默认的 props 属性。如所有的列默认都居左对齐，不支持排序，我们可以将 column-props 设置成：
+`columns-props` 配置用于定义 `columns` 各列默认的 props 属性。如所有的列默认都居左对齐，不支持排序，我们可以将 columns-props 设置成：
 
 ```javascript
 {
@@ -259,11 +260,11 @@ propsHandler({
   sortable: false
 }
 ```
-如需要为某些列单独定义显示行为可以通过 `column-schema` 进行单独配置。
+如需要为某些列单独定义显示行为可以通过 `columns-schema` 进行单独配置。
 
-> column-schema 配置
+> columns-schema 配置
 
-`column-schema` 主要用于单独定义某一列的行为。
+`columns-schema` 主要用于单独定义某一列的行为。
 
 ```javascript
 {
@@ -277,17 +278,17 @@ propsHandler({
 
 ```
 
-`column-schema` 是通过 columns 每列的 `label` 属性值来匹配的。这里的配置属性会覆盖 `column-props` 与 `columns` 设置对应的列的属性值。
+`columns-schema` 是通过 columns 每列的 `label` 属性值来匹配的。这里的配置属性会覆盖 `columns-props` 与 `columns` 设置对应的列的属性值。
 
-!> 覆盖的优先级为 `column-schema` > `columns` > `column-props`
+!> 覆盖的优先级为 `columns-schema` > `columns` > `columns-props`
 
-> column-handler 配置
+> columns-handler 配置
 
-`column-handler` 处理函数可以对已有的 `columns` 进行增删改操作，常见的用法就是为，`columns` 新增一个自定义的操作列：
+`columns-handler` 处理函数可以对已有的 `columns` 进行增删改操作，常见的用法就是为，`columns` 新增一个自定义的操作列：
 
 ```javascript
-// :column-handler="columnHandler"
-columnHandler (cols) {
+// :columns-handler="columnsHandler"
+columnsHandler (cols) {
   return cols.concat({
     label: '操作',
     align: 'left',
@@ -316,6 +317,10 @@ columnHandler (cols) {
 <iframe width="100%" height="600"
 src="//jsfiddle.net/nlush/azr14zfs/1/embedded/result,html,js,css/" allowfullscreen="allowfullscreen" frameborder="0">
 </iframe>
+
+> `column-key-map` 配置
+
+考虑到 `columns` 中的 `label` 项与 `prop` 项对应的属性 key 不一定是 `label` 与 `prop`，这时可以通过 `column-key-map` 做个映射。
 
 # Methods
 

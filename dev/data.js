@@ -58,11 +58,11 @@ export default {
     }
   ],
   columns: [
-    { label: '日期', prop: 'date' },
-    { label: '姓名', prop: 'name' },
-    { label: '省份', prop: 'province' },
-    { label: '市区', prop: 'city' },
-    { label: '地址', prop: 'address' },
-    { label: '邮编', prop: 'zip' }
+    { name: '日期', prop: 'date' },
+    { name: '姓名', prop: 'name' },
+    { name: '省份', prop: 'province' },
+    { name: '市区', prop: 'city' },
+    { name: '地址', prop: 'address' },
+    { name: '邮编', prop: 'zip' }
   ]
 }

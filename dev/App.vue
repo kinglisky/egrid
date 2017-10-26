@@ -2,12 +2,13 @@
   <div id="app">
     <egrid stripe
       :column-type="['expand', 'selection']"
+      :column-key-map="{ label: 'name' }"
       max-height="500"
       :data="data"
       :columns="columns"
-      :column-schema="columnSchema"
-      :column-props="columnProps"
-      :column-handler="columnHandler"
+      :columns-schema="columnsSchema"
+      :columns-props="columnsProps"
+      :columns-handler="columnsHandler"
       @selection-change="selectionChange">
       <template slot="expand" slot-scope="{ row }">
         <section class="expand-detail">
@@ -33,17 +34,17 @@ export default {
     return {
       data: Data.data,
       columns: Data.columns,
-      // columnProps 用于定义所有 columns 公共的属性，
+      // columnsProps 用于定义所有 columns 公共的属性，
       // 这里属性可以参考这里： http://element.eleme.io/#/zh-CN/component/table#table-column-attributes
-      columnProps: {
+      columnsProps: {
         width: 120,
         sortable: true,
         // 定义表格列如何渲染
         component: Editor
       },
 
-      // columnSchema 可以用来单独定义 columns 的某一列，这里的设置会覆盖 columnProps 的配置属性
-      columnSchema: {
+      // columnsSchema 可以用来单独定义 columns 的某一列，这里的设置会覆盖 columnsProps 的配置属性
+      columnsSchema: {
         '地址': {
           width: 'auto',
           // propsHandler 可用于转换传给自定义组件的 props
@@ -64,8 +65,8 @@ export default {
   },
 
   methods: {
-    // columnHandler 可用于在现有的 columns 进行操作，对 columns 进行增删改，这里新增了操作列
-    columnHandler (cols) {
+    // columnsHandler 可用于在现有的 columns 进行操作，对 columns 进行增删改，这里新增了操作列
+    columnsHandler (cols) {
       return cols.concat({
         // fixed: 'right',
         label: '操作',

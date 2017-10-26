@@ -46,6 +46,15 @@ const COLUMN_PROPS = {
   component: Text
 }
 
+const COLUMN_KEY_MAP = {
+  label: 'label',
+  prop: 'prop'
+}
+
+const merge = (...args) =>  {
+  return Object.assign({}, ...args)
+}
+
 export default {
   name: 'Egrid',
 
@@ -66,11 +75,13 @@ export default {
 
     columnType: [String, Array],
 
-    columnProps: Object,
+    columnKeyMap: Object,
 
-    columnSchema: Object,
+    columnsProps: Object,
 
-    columnHandler: Function,
+    columnsSchema: Object,
+
+    columnsHandler: Function,
 
     slotAppend: Boolean
   },
@@ -95,15 +106,20 @@ export default {
     renderColumns () {
       const {
         columns,
-        columnHandler,
-        columnProps: props,
-        columnSchema: schema
+        columnKeyMap,
+        columnsHandler,
+        columnsProps: props,
+        columnsSchema: schema
       } = this
+      const map = merge(COLUMN_KEY_MAP, columnKeyMap)
       const renderColumns = columns.map(col => {
-        const mix = schema && schema[col.label] || {}
-        return Object.assign({}, COLUMN_PROPS, props, col, mix)
+        const mix = schema && schema[col[map.label]] || {}
+        const it = merge(COLUMN_PROPS, props, col, mix)
+        it.label = it[map.label]
+        it.prop = it[map.prop]
+        return it
       })
-      return columnHandler && columnHandler(renderColumns) || renderColumns
+      return columnsHandler && columnsHandler(renderColumns) || renderColumns
     },
 
     columnTypes () {
@@ -118,7 +134,7 @@ export default {
 
   methods: {
     getColBind (col) {
-      const bind = Object.assign({}, col)
+      const bind = merge(col)
       delete bind.component
       delete bind.listeners
       delete bind.propsHandler
