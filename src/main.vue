@@ -4,12 +4,12 @@
     v-bind="tableBind"
     v-on="$listeners">
     <template v-for="tp in columnTypes">
-      <el-table-column :key="tp" type="expand" v-if="tp === 'expand'">
+      <el-table-column v-if="tp === 'expand'" type="expand" :key="tp">
         <template slot-scope="props">
           <slot name="expand" v-bind="props"></slot>
         </template>
       </el-table-column>
-      <el-table-column :key="tp" v-else :type="tp"></el-table-column>
+      <el-table-column v-else :type="tp" :key="tp"></el-table-column>
     </template>
     <el-table-column v-for="col in renderColumns"
       :key="col.label" v-bind="getColBind(col)">
@@ -45,6 +45,8 @@ const COLUMN_PROPS = {
   align: 'left',
   component: Text
 }
+
+const TYPES = ['selection', 'expand', 'index']
 
 const COLUMN_KEY_MAP = {
   label: 'label',
@@ -87,11 +89,7 @@ export default {
   },
 
   computed: {
-    showSelectionIndex () {
-      return this.columnType === 'selection' || this.columnType === 'index'
-    },
-
-    // 处理 $attrs 里面 Boolean 类型的 prop 和，统一 prop 命名 
+    // 处理 $attrs 里面 Boolean 类型的 prop 和统一 prop 命名 
     tableBind () {
       const { $attrs } = this
       const bind = {}
@@ -123,12 +121,12 @@ export default {
     },
 
     columnTypes () {
-      const type = this.columnType
+      const { columnType: type } = this
       if (!type) return []
-      if (typeof type === 'string') {
+      if (typeof type === 'string' && ~TYPES.indexOf(type)) {
         return [type]
       }
-      return  Array.isArray(type) ? type : []
+      return Array.isArray(type) && type.filter(it => ~TYPES.indexOf(it)) || []
     }
   },
 

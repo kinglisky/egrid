@@ -13,7 +13,7 @@
       <template slot="expand" slot-scope="{ row }">
         <section class="expand-detail">
           <div v-for="col in columns" :key="col.label">
-            {{ col.label }}：{{ row[col.prop] }}
+            {{ col.name }}：{{ row[col.prop] }}
           </div>
         </section>
       </template>
