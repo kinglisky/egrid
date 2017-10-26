@@ -30,7 +30,7 @@ Vue.use(Egrid)
 
 在线栗子🌰 ：
 <iframe width="100%" height="400"
-  src="//jsfiddle.net/nlush/yr0uf0fm/6/embedded/result,html,js,css/" allowfullscreen="allowfullscreen" frameborder="0">
+  src="//jsfiddle.net/nlush/yr0uf0fm/7/embedded/result,html,js,css/" allowfullscreen="allowfullscreen" frameborder="0">
 </iframe>
 
 表格中自定义渲染的组件：
@@ -315,7 +315,7 @@ columnsHandler (cols) {
 使用可参考下面的栗子🌰 ：
 
 <iframe width="100%" height="600"
-src="//jsfiddle.net/nlush/azr14zfs/1/embedded/result,html,js,css/" allowfullscreen="allowfullscreen" frameborder="0">
+src="//jsfiddle.net/nlush/azr14zfs/2/embedded/result,html,js,css/" allowfullscreen="allowfullscreen" frameborder="0">
 </iframe>
 
 > `column-key-map` 配置
