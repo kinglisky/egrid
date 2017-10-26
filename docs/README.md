@@ -315,7 +315,7 @@ columnsHandler (cols) {
 使用可参考下面的栗子🌰 ：
 
 <iframe width="100%" height="600"
-src="//jsfiddle.net/nlush/azr14zfs/2/embedded/result,html,js,css/" allowfullscreen="allowfullscreen" frameborder="0">
+src="//jsfiddle.net/nlush/azr14zfs/3/embedded/result,html,js,css/" allowfullscreen="allowfullscreen" frameborder="0">
 </iframe>
 
 > `column-key-map` 配置
