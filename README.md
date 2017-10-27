@@ -1,8 +1,9 @@
 # Egrid
 
-## 基于 `Element-UI` `Table` 组件封装的高阶表格组件。
+### 基于 `Element-UI` `Table` 组件封装的高阶表格组件，可无缝支持 element 的 table 组件。
 
 文档 [http://kinglisky.github.io/egrid](http://kinglisky.github.io/egrid)
+
 
 ### 开发
 
@@ -32,6 +33,7 @@ import Vue from 'vue'
 import Egrid from 'egrid'
 
 // table 的样式需要手动引入
+import 'element-ui/lib/theme-default/icon.css'
 import 'element-ui/lib/theme-default/table.css'
 import 'element-ui/lib/theme-default/table-column.css'
 
@@ -86,5 +88,7 @@ Vue.use(Egrid)
 
 如果每次使用表格都要重复这一段代码，那久而久之你的项目肯定会冗余很多重复的代码，而且也不利于维护。
 这时候我们就有必要在原始的表格组件基础上再封装一层，将这些重复的代码放在组件内部，使用时考虑如何通过一种配置的方式去定制表格。
+
+`egrid` 就是为此而生的，少写两行是两行。耶~~~
 
 

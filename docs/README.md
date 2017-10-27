@@ -1,8 +1,8 @@
 # Egrid
 
-基于 `Element-UI` `Table` 组件封装的高阶表格组件。
+基于 `Element-UI` `Table` 组件封装的高阶表格组件，可无缝支持 element 的 table 组件。
 
-min 大小仅 4kb。实现比较简单，源码在这： [https://github.com/kinglisky/egrid](https://github.com/kinglisky/egrid)
+min 文件仅 3.8 kb。实现比较简单，源码在这： [https://github.com/kinglisky/egrid](https://github.com/kinglisky/egrid)
 
 首先组件依赖 `Element Table`，先要安装 Element：
 
@@ -22,6 +22,7 @@ import Vue from 'vue'
 import Egrid from 'egrid'
 
 // table 的样式需要手动引入
+import 'element-ui/lib/theme-default/icon.css'
 import 'element-ui/lib/theme-default/table.css'
 import 'element-ui/lib/theme-default/table-column.css'
 
@@ -33,7 +34,7 @@ Vue.use(Egrid)
   src="//jsfiddle.net/nlush/yr0uf0fm/7/embedded/result,html,js,css/" allowfullscreen="allowfullscreen" frameborder="0">
 </iframe>
 
-表格中自定义渲染的组件：
+先创建表格中使用的自定义组件：
 
 `cell-btn.vue`
 ```html
@@ -105,7 +106,7 @@ export default {
     return {
       data: Data.data,
       columns: Data.columns,
-      // columnsProps 用于定义 columns 公共的属性，
+      // columnsProps 用于定义 columns 公共的属性
       columnsProps: {
         width: 120,
         sortable: true,
@@ -117,7 +118,7 @@ export default {
       columnsSchema: {
         '地址': {
           width: 'auto',
-          // propsHandler 可用于转换传给自定义组件的 props
+          // propsHandler 可用于转换传给自定义组件的 props 这里将 props 变成了 address
           propsHandler ({ col, row }) {
             return { address: row[col.prop] }
           },
@@ -162,7 +163,7 @@ export default {
 
 # Attributes
 
-!> `egrid` 只是在 `Element Table` 封装了一层，原本设置在 `Table` 上的 `props` 与事件监听可直接设置到 `egrid` 上，如：`height` `max-height` `border` `@selection-change`......可参考[Element Tabel 文档](http://element.eleme.io/#/zh-CN/component/table#table-attributes)
+!> `egrid` 只是在 `Element Table` 封装了一层，原本设置在 `Table` 上的 `props` 与事件监听可直接设置到 `egrid` 上，如：`height` `max-height` `border` `@selection-change`......具体配置可参考[Element Tabel 文档](http://element.eleme.io/#/zh-CN/component/table#table-attributes)
 
 | 属性   | 说明 | 可选项 | 默认 |
 | ---   | ---- | --- | --- |
@@ -222,7 +223,7 @@ const columns = [
 `listeners`
 用于监听 `component` 配置的自定义渲染组件内部 `$emit` 出的事件，这里使用 Vue 2.4 引入 `v-on` [新语法](https://cn.vuejs.org/v2/api/#v-on)，可直接为 `v-on` 绑定一个对象，如：
 ```javascrip
-{ 'custom-event': function (data) {...} }
+v-on="{ 'custom-event': function (data) {...} }"
 ```
 
 `propsHandler`
@@ -236,11 +237,9 @@ const columns = [
 可通过 `propsHandler` 对 `{ row, col, column }`  进行转化你想要的形式：
 
 ```javascript
-propsHandler({
-  row, col, column
-})
+propsHandler({ row, col, column })
 
-转化成 =>
+// 转化成 =>
 
 {
   msg: row[col.prop],
@@ -252,7 +251,7 @@ propsHandler({
 ```
 > columns-props 配置
 
-`columns-props` 配置用于定义 `columns` 各列默认的 props 属性。如所有的列默认都居左对齐，不支持排序，我们可以将 columns-props 设置成：
+`columns-props` 配置用于定义 `columns` 各列默认的 props 属性。如所有的列默认都**居左对齐**，**不支持排序**，我们可以将 columns-props 设置成：
 
 ```javascript
 {
@@ -278,7 +277,7 @@ propsHandler({
 
 ```
 
-`columns-schema` 是通过 columns 每列的 `label` 属性值来匹配的。这里的配置属性会覆盖 `columns-props` 与 `columns` 设置对应的列的属性值。
+`columns-schema` 是通过 columns 每列的 `label` 属性值来匹配的。这里的配置属性会覆盖 `columns-props` 与 `columns` 设置的对应的列的属性值。
 
 !> 覆盖的优先级为 `columns-schema` > `columns` > `columns-props`
 
@@ -308,19 +307,22 @@ columnsHandler (cols) {
 
 * `expand`： 表格支持折叠展开行 
 
-当 `column-type` 为 `expand` 时表格支持折叠展开行，此时可用通过 `slot(slot="expand")` 方式自定渲染折叠详情。
+当 `column-type` 为 `expand` 时表格支持折叠展开行，此时可用通过 `slot (slot="expand")` 方式自定渲染折叠详情。
 
-当 `column-type` 为数组时可设置多个特殊列，`['expand', 'index', 'selection']`。
+当 `column-type` 为数组时可设置多个特殊列，`['expand', 'index', 'selection']`，一般很少这样使用。
 
 使用可参考下面的栗子🌰 ：
 
 <iframe width="100%" height="600"
-src="//jsfiddle.net/nlush/azr14zfs/3/embedded/result,html,js,css/" allowfullscreen="allowfullscreen" frameborder="0">
+src="//jsfiddle.net/nlush/azr14zfs/3/embedded/result,html,js,css/"
+allowfullscreen="allowfullscreen" frameborder="0">
 </iframe>
 
 > `column-key-map` 配置
 
 考虑到 `columns` 中的 `label` 项与 `prop` 项对应的属性 key 不一定是 `label` 与 `prop`，这时可以通过 `column-key-map` 做个映射。
+
+
 
 # Methods
 
@@ -328,11 +330,12 @@ src="//jsfiddle.net/nlush/azr14zfs/3/embedded/result,html,js,css/" allowfullscre
 
 !> 直接代理一层原 `Element Table` 的方法。可参考[文档](http://element.eleme.io/#/zh-CN/component/table#table-methods)
 
+
 # Slots
 
-`append`：对应 `Element Table` 的 `slot="append"`，[文档](http://element.eleme.io/#/zh-CN/component/table#table-slot)
+`append`：对应 `Element Table` 的 `slot="append"` [可参考文档](http://element.eleme.io/#/zh-CN/component/table#table-slot)，使用时注意设置 `slot-append` 为 `true`
 
-`expand`： 当 `column-type` 为 `expand` 时自定义，行折叠内容的。
+`expand`： 当 `column-type` 为 `expand` 时使用，用于自定义折叠展开内容。
 
 
 
