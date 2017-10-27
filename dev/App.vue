@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <egrid stripe
+    <egrid ref="egrid" stripe
       :column-type="['expand', 'selection']"
       :column-key-map="{ label: 'name' }"
       max-height="500"
@@ -18,6 +18,7 @@
         </section>
       </template>
     </egrid>
+    <button @click="clearSelection">CLEAR</button>
   </div>
 </template>
 
@@ -83,6 +84,13 @@ export default {
 
     selectionChange (rows) {
       console.log('selected', rows)
+    },
+
+    clearSelection () {
+      const { egrid } = this.$refs
+      if (egrid && egrid.clearSelection) {
+        egrid.clearSelection()
+      }
     }
   },
 

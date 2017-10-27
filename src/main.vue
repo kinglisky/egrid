@@ -1,6 +1,6 @@
 <template>
-  <el-table ref="grid"
-   :data="data"
+  <el-table class="egrid"
+    :data="data" ref="grid"
     v-bind="tableBind"
     v-on="$listeners">
     <template v-for="tp in columnTypes">
@@ -53,9 +53,7 @@ const COLUMN_KEY_MAP = {
   prop: 'prop'
 }
 
-const merge = (...args) =>  {
-  return Object.assign({}, ...args)
-}
+const merge = (...args) => (Object.assign({}, ...args))
 
 export default {
   name: 'Egrid',
@@ -171,7 +169,6 @@ export default {
     clearFilter () {
       this.trigger('clearFilter')
     }
-    
   },
 
   components: {
