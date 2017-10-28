@@ -2,6 +2,8 @@
 
 ### 基于 `Element-UI` `Table` 组件封装的高阶表格组件，可无缝支持 element 的 table 组件。
 
+element 升级到了 2.0 了， 不用担心可以无缝升级的~
+
 文档 [http://kinglisky.github.io/egrid](http://kinglisky.github.io/egrid)
 
 

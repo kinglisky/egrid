@@ -4,6 +4,8 @@
 
 min 文件仅 3.8 kb。实现比较简单，源码在这： [https://github.com/kinglisky/egrid](https://github.com/kinglisky/egrid)
 
+element 升级到了 2.0 了， 不用担心可以直接用。
+
 首先组件依赖 `Element Table`，先要安装 Element：
 
 > `npm i element-ui -S`
