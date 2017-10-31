@@ -28,7 +28,6 @@ import Egrid from '../src/index'
 import Data from './data'
 import Btn from './cell-btn.vue'
 import Editor from './cell-editor.vue'
-
 export default {
   name: 'app',
   data () {

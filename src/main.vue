@@ -29,6 +29,7 @@
 <script>
 import ElTable from 'element-ui/lib/table'
 import ElTableColumn from 'element-ui/lib/table-column'
+import methods from './methods'
 import Text from './text'
 
 const BOOLEAN_KEYS = [
@@ -53,10 +54,10 @@ const COLUMN_KEY_MAP = {
   prop: 'prop'
 }
 
-const merge = (...args) => (Object.assign({}, ...args))
-
 export default {
   name: 'Egrid',
+
+  mixins: [methods],
 
   props: {
     data: {
@@ -107,10 +108,10 @@ export default {
         columnsProps: props,
         columnsSchema: schema
       } = this
-      const map = merge(COLUMN_KEY_MAP, columnKeyMap)
+      const map = Object.assign({}, COLUMN_KEY_MAP, columnKeyMap)
       const renderColumns = columns.map(col => {
         const mix = schema && schema[col[map.label]] || {}
-        const it = merge(COLUMN_PROPS, props, col, mix)
+        const it = Object.assign({}, COLUMN_PROPS, props, col, mix)
         it.label = it[map.label]
         it.prop = it[map.prop]
         return it
@@ -125,49 +126,6 @@ export default {
         return [type]
       }
       return Array.isArray(type) && type.filter(it => ~TYPES.indexOf(it)) || []
-    }
-  },
-
-  methods: {
-    getColBind (col) {
-      const bind = merge(col)
-      delete bind.component
-      delete bind.listeners
-      delete bind.propsHandler
-      return bind
-    },
-
-    getCptBind ({ row, column }, col) {
-      const props = { row, col, column }
-      const handler = col.propsHandler
-      return handler && handler(props) || props
-    },
-
-    trigger (method, ...args) {
-      const { $refs: { grid } } = this
-      if (grid && grid[method]) {
-        grid[method](...args)
-      }
-    },
-
-    clearSelection (...args) {
-      this.trigger('clearSelection', ...args)
-    },
-
-    toggleRowSelection (...args) {
-      this.trigger('toggleRowSelection', ...args)
-    },
-
-    setCurrentRow (...args) {
-      this.trigger('setCurrentRow', ...args)
-    },
-
-    clearSort () {
-      this.trigger('clearSort')
-    },
-
-    clearFilter () {
-      this.trigger('clearFilter')
     }
   },
 
