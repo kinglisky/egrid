@@ -330,6 +330,8 @@ allowfullscreen="allowfullscreen" frameborder="0">
 
 `clearSelection` `toggleRowSelection` `setCurrentRow`
 
+`toggleRowExpansion` `clearSort` `clearFilter`
+
 !> 直接代理一层原 `Element Table` 的方法。可参考[文档](http://element.eleme.io/#/zh-CN/component/table#table-methods)
 
 

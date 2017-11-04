@@ -129,6 +129,22 @@ export default {
     }
   },
 
+  methods: {
+    getColBind (col) {
+      const bind = Object.assign({}, col)
+      delete bind.component
+      delete bind.listeners
+      delete bind.propsHandler
+      return bind
+    },
+
+    getCptBind ({ row, column }, col) {
+      const props = { row, col, column }
+      const handler = col.propsHandler
+      return handler && handler(props) || props
+    }
+  },
+
   components: {
     [ElTable.name]: ElTable,
     [ElTableColumn.name]: ElTableColumn
