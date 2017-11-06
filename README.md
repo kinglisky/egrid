@@ -38,6 +38,11 @@ import Egrid from 'egrid'
 import 'element-ui/lib/theme-default/icon.css'
 import 'element-ui/lib/theme-default/table.css'
 import 'element-ui/lib/theme-default/table-column.css'
+// 或
+import 'element-ui/lib/theme-default/index.css'
+
+
+
 
 Vue.use(Egrid)
 ```
