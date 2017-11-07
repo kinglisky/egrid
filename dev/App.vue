@@ -7,7 +7,6 @@
       :data="data"
       :columns="columns"
       :columns-schema="columnsSchema"
-      :columns-props="columnsProps"
       :columns-handler="columnsHandler"
       @selection-change="selectionChange">
       <template slot="expand" slot-scope="{ row }">
@@ -28,7 +27,6 @@ import Egrid from '../src/index'
 import Data from './data'
 import Btn from './cell-btn.vue'
 import Editor from './cell-editor.vue'
-console.log(Egrid)
 export default {
   name: 'app',
   data () {
@@ -37,12 +35,12 @@ export default {
       columns: Data.columns,
       // columnsProps 用于定义所有 columns 公共的属性，
       // 这里属性可以参考这里： http://element.eleme.io/#/zh-CN/component/table#table-column-attributes
-      columnsProps: {
-        width: 120,
-        sortable: true,
-        // 定义表格列如何渲染
-        component: Editor
-      },
+      // columnsProps: {
+      //   width: 120,
+      //   sortable: true,
+      //   // 定义表格列如何渲染
+      //   component: Editor
+      // },
 
       // columnsSchema 可以用来单独定义 columns 的某一列，这里的设置会覆盖 columnsProps 的配置属性
       columnsSchema: {
@@ -60,6 +58,11 @@ export default {
               }, this.address)
             }
           })
+        },
+        '邮编': {
+          formater (row, col) {
+            return row[col.prop] + '...'
+          }
         }
       }
     }

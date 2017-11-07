@@ -1,8 +1,9 @@
 
 export default {
   functional: true,
-  props: ['row', 'col'],
+  props: ['row', 'col', 'column'],
   render (h, { props: { row, col } }) {
-    return row[col.prop]
+    const { formater } = col
+    return formater && formater(row, col) || row[col.prop]
   }
 }
