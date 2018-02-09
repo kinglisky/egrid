@@ -26,7 +26,7 @@
     "css-loader": "^0.28.8",
     "docsify": "^4.5.7",
     "file-loader": "^1.1.6",
-    "rollup": "^0.50.1",
+    "rollup": "^0.55.3",
     "rollup-plugin-babel": "^3.0.3",
     "rollup-plugin-commonjs": "^8.2.6",
     "rollup-plugin-node-resolve": "^3.0.0",

@@ -23,7 +23,7 @@
 
 <script>
 import Vue from 'vue'
-import Egrid from '../src/index'
+import Egrid from '../lib/index.com'
 import Data from './data'
 import Btn from './cell-btn.vue'
 import Editor from './cell-editor.vue'
