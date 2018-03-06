@@ -1,7 +1,7 @@
 {
   "name": "egrid",
   "description": "element-ui table packaging component",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "author": "芊野 <free.nan.sky@gmail.com>",
   "private": false,
   "repository": {
