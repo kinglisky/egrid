@@ -41,7 +41,7 @@
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.9.7"
   },
-  "dependencies": {
+  "peerDependencies": {
     "element-ui": "^2.0.10"
   }
 }
