@@ -3,13 +3,21 @@
     :data="data" ref="grid"
     v-bind="tableBind"
     v-on="$listeners">
-    <template v-for="tp in columnTypes">
-      <el-table-column v-if="tp === 'expand'" type="expand" :key="tp">
+    <template v-for="tp in typesColumns">
+      <el-table-column 
+        v-if="tp.type === 'expand'"
+        v-bind="tp.props"
+        type="expand"
+        :key="tp.type">
         <template slot-scope="props">
           <slot name="expand" v-bind="props"></slot>
         </template>
       </el-table-column>
-      <el-table-column v-else :type="tp" :key="tp"></el-table-column>
+      <el-table-column v-else
+        :key="tp.type"
+        :type="tp.type"
+        v-bind="tp.props">
+      </el-table-column>
     </template>
     <el-table-column v-for="col in renderColumns"
       :key="col.label" v-bind="getColBind(col)">
@@ -76,6 +84,8 @@ export default {
 
     columnType: [String, Array],
 
+    columnTypeProps: Object,
+
     columnKeyMap: Object,
 
     columnsProps: Object,
@@ -119,13 +129,23 @@ export default {
       return columnsHandler && columnsHandler(renderColumns) || renderColumns
     },
 
-    columnTypes () {
-      const { columnType: type } = this
-      if (!type) return []
+    // 用于渲染特殊列
+    typesColumns () {
+      const { columnType: type, columnTypeProps } = this
+      let typeColums = []
       if (typeof type === 'string' && ~TYPES.indexOf(type)) {
-        return [type]
+        typeColums = [type]
       }
-      return Array.isArray(type) && type.filter(it => ~TYPES.indexOf(it)) || []
+      if (Array.isArray(type)) {
+        typeColums = type.filter(it => ~TYPES.indexOf(it))
+      }
+      const map = columnTypeProps || {}
+      return typeColums.map(type => {
+        return {
+          type,
+          props: map[type]
+        }
+      })
     }
   },
 

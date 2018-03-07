@@ -29,6 +29,10 @@ export default {
 
     clearSelection (...args) {
       this.trigger('clearSelection', ...args)
+    },
+
+    doLayout () {
+      this.trigger('doLayout')
     }
   }
 }

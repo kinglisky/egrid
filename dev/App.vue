@@ -2,6 +2,7 @@
   <div id="app">
     <egrid ref="egrid" stripe
       :column-type="['expand', 'selection']"
+      :column-type-props=columnTypeProps
       :column-key-map="{ label: 'name' }"
       max-height="500"
       :data="data"
@@ -24,12 +25,21 @@
 <script>
 import Vue from 'vue'
 import Egrid from '../lib/index.com'
+// import Egrid from '../src/index'
 import Data from './data'
 import Btn from './cell-btn.vue'
 import Editor from './cell-editor.vue'
 export default {
   name: 'app',
   data () {
+    this.columnTypeProps = {
+      selection: {
+        // reserveSelection: true,
+        selectable (row, index) {
+          return index < 2
+        }
+      }
+    }
     return {
       data: Data.data,
       columns: Data.columns,
@@ -64,7 +74,8 @@ export default {
             return row[col.prop] + '...'
           }
         }
-      }
+      },
+      selecetedRows: []
     }
   },
 
@@ -86,6 +97,7 @@ export default {
     },
 
     selectionChange (rows) {
+      this.selecetedRows = rows
       console.log('selected', rows)
     },
 
