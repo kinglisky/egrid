@@ -1,5 +1,10 @@
 <template>
   <div id="app">
+    <egrid stripe
+      max-height="500"
+      :data="data"
+      :columns="columns">
+    </egrid>
     <egrid ref="egrid" stripe
       :column-type="['expand', 'selection']"
       :column-type-props=columnTypeProps
@@ -24,8 +29,8 @@
 
 <script>
 import Vue from 'vue'
-import Egrid from '../lib/index.com'
-// import Egrid from '../src/index'
+// import Egrid from '../lib/index.com'
+import Egrid from '../src/index'
 import Data from './data'
 import Btn from './cell-btn.vue'
 import Editor from './cell-editor.vue'
