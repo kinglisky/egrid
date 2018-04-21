@@ -33,7 +33,7 @@ Vue.use(Egrid)
 
 在线栗子🌰 ：
 <iframe width="100%" height="400"
-  src="//jsfiddle.net/nlush/yr0uf0fm/7/embedded/result,html,js,css/" allowfullscreen="allowfullscreen" frameborder="0">
+  src="//jsfiddle.net/nlush/yr0uf0fm/98/embedded/result,html,js,css/" allowfullscreen="allowfullscreen" frameborder="0">
 </iframe>
 
 先创建表格中使用的自定义组件：
@@ -316,7 +316,7 @@ columnsHandler (cols) {
 使用可参考下面的栗子🌰 ：
 
 <iframe width="100%" height="600"
-src="//jsfiddle.net/nlush/azr14zfs/3/embedded/result,html,js,css/"
+src="//jsfiddle.net/nlush/azr14zfs/45/embedded/result,html,js,css/"
 allowfullscreen="allowfullscreen" frameborder="0">
 </iframe>
 
