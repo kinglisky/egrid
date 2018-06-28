@@ -1,38 +1,23 @@
-export default {
-  methods: {
-    trigger (method, ...args) {
-      const { $refs: { grid } } = this
-      if (grid && grid[method]) {
-        grid[method](...args)
+const METHOD_NAMES = [
+  "setCurrentRow",
+  "toggleRowSelection",
+  "toggleRowExpansion",
+  "clearSelection",
+  "clearFilter",
+  "clearSort",
+  "doLayout",
+  "sort"
+]
+
+const methods = {}
+
+METHOD_NAMES.forEach(name => {
+  methods[name] = function (...args) {
+      const { grid } = this.$refs
+      if (grid && grid[name]) { 
+          grid[name](...args)
       }
-    },
-
-    toggleRowSelection (...args) {
-      this.trigger('toggleRowSelection', ...args)
-    },
-
-    toggleRowExpansion (...args) {
-      this.trigger('toggleRowExpansion', ...args)
-    },
-
-    setCurrentRow (...args) {
-      this.trigger('setCurrentRow', ...args)
-    },
-
-    clearSort () {
-      this.trigger('clearSort')
-    },
-
-    clearFilter () {
-      this.trigger('clearFilter')
-    },
-
-    clearSelection (...args) {
-      this.trigger('clearSelection', ...args)
-    },
-
-    doLayout () {
-      this.trigger('doLayout')
-    }
   }
-}
+})
+
+export default { methods }
