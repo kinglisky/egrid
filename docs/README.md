@@ -328,9 +328,18 @@ allowfullscreen="allowfullscreen" frameborder="0">
 
 # Methods
 
-`clearSelection` `toggleRowSelection` `setCurrentRow`
-
-`toggleRowExpansion` `clearSort` `clearFilter`
+```javascript
+[
+  'setCurrentRow',
+  'toggleRowSelection',
+  'toggleRowExpansion',
+  'clearSelection',
+  'clearFilter',
+  'clearSort',
+  'doLayout',
+  'sort'
+]
+```
 
 !> 直接代理一层原 `Element Table` 的方法。可参考[文档](http://element.eleme.io/#/zh-CN/component/table#table-methods)
 
